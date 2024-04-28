@@ -1,0 +1,47 @@
+/* Default styles */
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif, sans-serif;
+  background-color: #111111;
+  color: #f0f0f0;
+}
+
+.navbar {
+  background-color: #111111;
+  text-align: center;
+  padding: 30px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  text-align: center;
+}
+
+.under-construction {
+  font-size: 44px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    font-size: 18px;
+  }
+
+  .content {
+    height: 70vh;
+    padding-top: 60px;
+  }
+
+  .under-construction {
+    font-size: 36px;
+    padding-top: 90px;
+  }
+}
