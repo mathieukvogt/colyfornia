@@ -61,8 +61,21 @@ function isAboutIcon(target) {
 
 // Function to set the correct position based on screen width
 function updateOverlayPosition() {
-  // No need to update top position as we're coming from bottom now
-  // But we could adjust other properties if needed based on screen size
+  const navbar = document.querySelector(".navbar");
+  const navbarHeight = navbar.offsetHeight;
+  const navbarBottom = navbar.getBoundingClientRect().bottom;
+
+  // Calculate the proper top position to maintain space below navbar
+  const topPosition = navbarBottom + 30; // Adding 10px buffer
+
+  // Apply the calculated height to ensure it starts below navbar
+  aboutOverlay.style.height = `calc(100vh - ${topPosition}px)`;
+
+  // Update the animation if needed
+  if (tl.progress() > 0) {
+    // If the animation is active, update the end position
+    gsap.set(aboutOverlay, { height: `calc(100vh - ${topPosition}px)` });
+  }
 }
 
 // Call this function on page load
@@ -70,3 +83,6 @@ updateOverlayPosition();
 
 // Update when window is resized
 window.addEventListener("resize", updateOverlayPosition);
+
+// Also update on orientation change for mobile devices
+window.addEventListener("orientationchange", updateOverlayPosition);
