@@ -43,6 +43,8 @@ tl.to(overlayBackdrop, {
 
 // Add event listener to about icon
 aboutIcon.addEventListener("click", () => {
+  // Update position right before showing the modal
+  updateOverlayPosition();
   tl.play();
 });
 
@@ -78,24 +80,59 @@ function updateOverlayPosition() {
   const navbarHeight = navbar.offsetHeight;
   const navbarBottom = navbar.getBoundingClientRect().bottom;
 
-  // Calculate the proper top position to maintain space below navbar
-  const topPosition = navbarBottom + 30; // Adding 10px buffer
+  // Get a stable height that won't change during scrolling
+  const stableHeight = window.innerHeight;
 
-  // Apply the calculated height to ensure it starts below navbar
-  aboutOverlay.style.height = `calc(100vh - ${topPosition}px)`;
+  // Calculate the proper top position to maintain space below navbar
+  const topPosition = navbarBottom + 30; // Adding 30px buffer
+
+  // Apply the calculated height using innerHeight instead of vh units
+  aboutOverlay.style.height = `${stableHeight - topPosition}px`;
 
   // Update the animation if needed
   if (tl.progress() > 0) {
     // If the animation is active, update the end position
-    gsap.set(aboutOverlay, { height: `calc(100vh - ${topPosition}px)` });
+    gsap.set(aboutOverlay, { height: `${stableHeight - topPosition}px` });
   }
 }
 
 // Call this function on page load
 updateOverlayPosition();
 
-// Update when window is resized
-window.addEventListener("resize", updateOverlayPosition);
+// Instead of listening for resize and orientation change separately,
+// use a more comprehensive approach to handle all cases
+function handleViewportChanges() {
+  // Small delay to ensure values have stabilized
+  setTimeout(updateOverlayPosition, 50);
+}
 
-// Also update on orientation change for mobile devices
-window.addEventListener("orientationchange", updateOverlayPosition);
+// Update when window is resized
+window.addEventListener("resize", handleViewportChanges);
+
+// Update on orientation change
+window.addEventListener("orientationchange", handleViewportChanges);
+
+// Add dark mode toggle functionality
+themeIcon.addEventListener("click", () => {
+  // Toggle dark mode class on body
+  document.body.classList.toggle("dark-mode");
+
+  // Animate the theme icon when clicked
+  gsap.to(themeIcon, {
+    rotation: "+=360",
+    duration: 1,
+    ease: "power2.out",
+  });
+
+  // Save preference to localStorage
+  const isDarkMode = document.body.classList.contains("dark-mode");
+  localStorage.setItem("darkMode", isDarkMode);
+});
+
+// Check for saved user preference on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const savedDarkMode = localStorage.getItem("darkMode");
+  if (savedDarkMode === "true") {
+    document.body.classList.add("dark-mode");
+  }
+});
