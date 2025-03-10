@@ -59,7 +59,7 @@ body {
 
 .icon-container:hover,
 .icon-container:active {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #7676766e;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -106,14 +106,13 @@ body {
   height: calc(100vh - 6rem);
   padding: 2em;
   background: #ededed;
-  color: #141414;
+  color: #0400df;
   overflow-x: hidden;
   overflow-y: scroll;
   z-index: 2000;
   will-change: bottom, right;
   transform: translateZ(0);
   transform-origin: bottom right;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -216,11 +215,12 @@ body {
 
 .article-card {
   height: 28rem;
-  background-color: rgb(228, 228, 228);
+  background-color: #f0f0f0;
   border-radius: 0.5rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  border: 1px solid #0400df;
 }
 
 .article-image {
@@ -283,7 +283,7 @@ body {
 }
 
 .article-excerpt {
-  color: #000000;
+  color: #0400df;
   line-height: 1.6;
   font-size: 0.75rem;
 }
@@ -296,14 +296,14 @@ body {
 .article-title {
   margin-bottom: 1rem;
   font-size: 1rem;
-  color: #000000;
+  color: #0400df;
 }
 
 /* Add styles for the article meta information */
 .article-meta {
   display: flex;
   flex-direction: column;
-  color: rgb(0, 0, 0);
+  color: #0400df;
 }
 
 .article-date,
@@ -325,19 +325,19 @@ body {
 /* COLYFORNIA text styles */
 .colyfornia-container {
   margin-top: 1rem;
-  background-color: #0400df;
   width: 100%;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid #0400df;
 }
 
 .colyfornia-text {
   font-size: 2.3rem;
   font-weight: bold;
-  color: #ffffff;
+  color: #0400df;
   padding: 5rem 0;
 }
 
